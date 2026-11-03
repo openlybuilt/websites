@@ -1,0 +1,9 @@
+[submodule "openly"]
+	path = openly
+	url = https://github.com/openlybuilt/openly.git
+[submodule "design"]
+	path = design
+	url = https://github.com/openlybuilt/design.git
+[submodule "cua"]
+	path = cua
+	url = https://github.com/openlybuilt/cua.git
