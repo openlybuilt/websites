@@ -1,0 +1,27 @@
+name: Submodule checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  submodules:
+    name: Check website submodules
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Verify checked-out revisions
+        run: |
+          status="$(git submodule status --recursive)"
+          printf '%s\n' "$status"
+          if printf '%s\n' "$status" | grep -Eq '^[-+U]'; then
+            echo 'A submodule is missing, mismatched, or conflicted.'
+            exit 1
+          fi
